@@ -10,4 +10,6 @@ tags
 CTAGS
 .idea
 
+!src/node-fetch-logging/lib/
+
 local.js
