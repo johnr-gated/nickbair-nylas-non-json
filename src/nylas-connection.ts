@@ -1,6 +1,7 @@
 // TODO since node 10 URL is global
 import { URL } from 'url';
-import fetch, { Request } from 'node-fetch';
+// @ts-ignore
+import fetch, { Request } from '../src/node-fetch-logging';
 import * as config from './config';
 import RestfulModelCollection from './models/restful-model-collection';
 import CalendarRestfulModelCollection from './models/calendar-restful-model-collection';
@@ -211,7 +212,7 @@ export default class NylasConnection {
     const req = this.newRequest(options);
     return new Promise<any>((resolve, reject) => {
       return fetch(req)
-        .then(response => {
+        .then((response: any) => {
           if (typeof response === 'undefined') {
             return reject(new Error('No response'));
           }
@@ -229,7 +230,7 @@ export default class NylasConnection {
           }
 
           if (response.status > 299) {
-            return response.json().then(body => {
+            return response.json().then((body: any) => {
               const error = new NylasApiError(
                 response.status,
                 body.type,
@@ -247,16 +248,16 @@ export default class NylasConnection {
             if (options.downloadRequest) {
               response
                 .buffer()
-                .then(buffer => {
+                .then((buffer: any) => {
                   // Return an object with the headers and the body as a buffer
                   const fileDetails: { [key: string]: any } = {};
-                  response.headers.forEach((v, k) => {
+                  response.headers.forEach((v: any, k: any) => {
                     fileDetails[k] = v;
                   });
                   fileDetails['body'] = buffer;
                   return resolve(fileDetails);
                 })
-                .catch(e => {
+                .catch((e: any) => {
                   return reject(e);
                 });
             } else if (
