@@ -1,7 +1,7 @@
 // TODO since node 10 URL is global
 import { URL } from 'url';
 // @ts-ignore
-import fetch, { Request } from '../src/node-fetch-logging';
+import fetch, { Request } from './node-fetch-logging/lib';
 import * as config from './config';
 import RestfulModelCollection from './models/restful-model-collection';
 import CalendarRestfulModelCollection from './models/calendar-restful-model-collection';

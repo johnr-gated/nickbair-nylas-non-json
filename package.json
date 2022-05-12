@@ -14,7 +14,7 @@
     "lint:ci": "npm run lint:fix -- --quiet",
     "lint:prettier": "prettier --write '**/*.{ts,js}'",
     "lint:prettier:check": "prettier --check '**/*.{ts,js}'",
-    "build": "tsc",
+    "build": "tsc && cp -R ./src/node-fetch-logging ./lib",
     "prepare": "npm run build",
     "watch": "nodemon -w src --exec npm run build"
   },
