@@ -270,8 +270,6 @@ export default class NylasConnection {
           }
         })
         .catch((err: Error) => {
-          console.error(`Error details:\n method: ${options.method} path: ${options.path}`);
-          console.error(`Error encountered during request:\n${err.stack}`);
           return reject(err);
         });
     });

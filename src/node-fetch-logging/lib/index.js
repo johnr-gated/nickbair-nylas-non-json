@@ -269,8 +269,7 @@ Body.prototype = {
 			try {
 				return JSON.parse(buffer.toString());
 			} catch (err) {
-				console.error(buffer.toString());
-				return Body.Promise.reject(new FetchError(`invalid json response body at ${_this2.url} reason: ${err.message} raw: ${buffer.toString()}`, 'invalid-json'));
+				return Body.Promise.reject({ message: `invalid json response body at ${_this2.url} reason: ${err.message}`, url: _this2.url, status: _this2.status, statusText: _this2.statusText, rawResponse: buffer.toString() });
 			}
 		});
 	},
