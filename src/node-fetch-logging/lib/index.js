@@ -262,14 +262,25 @@ Body.prototype = {
   *
   * @return  Promise
   */
-	json() {
+	json(req = null) {
 		var _this2 = this;
 
 		return consumeBody.call(this).then(function (buffer) {
 			try {
 				return JSON.parse(buffer.toString());
 			} catch (err) {
-				return Body.Promise.reject({ message: `invalid json response body at ${_this2.url} reason: ${err.message}`, url: _this2.url, status: _this2.status, statusText: _this2.statusText, rawResponse: buffer.toString() });
+
+				const errorObj = {
+					message: `invalid json response body at ${_this2.url} reason: ${err.message}`,
+					url: _this2.url,
+					status: _this2.status,
+					httpMethod: req ? req.method : req,
+					statusText: _this2.statusText,
+					rawResponse: buffer.toString(),
+					rawRequest: req,
+				};
+
+				return Body.Promise.reject(errorObj);
 			}
 		});
 	},

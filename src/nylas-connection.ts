@@ -230,7 +230,7 @@ export default class NylasConnection {
           }
 
           if (response.status > 299) {
-            return response.json().then((body: any) => {
+            return response.json(req).then((body: any) => {
               const error = new NylasApiError(
                 response.status,
                 body.type,
